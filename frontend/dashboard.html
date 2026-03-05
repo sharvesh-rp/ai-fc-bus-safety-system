@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bus FC Safety Dashboard</title>
+</head>
+
+<body>
+
+<h2>Bus Fitness Certificate Evaluation</h2>
+
+<form id="inspectionForm">
+
+Brake Condition:
+<input type="number" id="brake"><br><br>
+
+Tire Condition:
+<input type="number" id="tire"><br><br>
+
+Engine Health:
+<input type="number" id="engine"><br><br>
+
+Leakage (0 or 1):
+<input type="number" id="leak"><br><br>
+
+Rust Level:
+<input type="number" id="rust"><br><br>
+
+<button type="button" onclick="submitData()">Evaluate</button>
+
+</form>
+
+<h3 id="result"></h3>
+
+<script>
+
+function submitData(){
+
+let data = {
+    brake_condition: parseInt(document.getElementById("brake").value),
+    tire_condition: parseInt(document.getElementById("tire").value),
+    engine_health: parseInt(document.getElementById("engine").value),
+    leakage: parseInt(document.getElementById("leak").value),
+    rust_level: parseInt(document.getElementById("rust").value)
+}
+
+fetch("http://127.0.0.1:5000/predict", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(data => {
+document.getElementById("result").innerText = "FC Status: " + data.FC_Status
+})
+
+}
+
+</script>
+
+</body>
+</html>
