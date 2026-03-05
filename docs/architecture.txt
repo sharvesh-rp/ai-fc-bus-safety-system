@@ -1,0 +1,11 @@
+Inspection Data
+      ↓
+Rule Validation
+      ↓
+AI Model Prediction
+      ↓
+Decision Engine
+      ↓
+FC Certificate Result
+      ↓
+Dashboard
